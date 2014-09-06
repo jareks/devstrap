@@ -1,0 +1,17 @@
+---
+- name: install common packages
+  apt: name=git state=present
+
+- name: symlink gitconfig and gitignore_global
+  file: 
+    state=link
+    src={{ playbook_dir }}/jareks.devstrap.git/files/{{ item }}
+    dest={{ local_home }}/{{ item }}
+  with_items:
+    - .gitconfig
+    - .gitignore_global
+
+- name: create gitconfig_local
+  copy: 
+    src=.gitconfig_local
+    dest={{ local_home }}/.gitconfig_local

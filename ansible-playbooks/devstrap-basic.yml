@@ -2,4 +2,7 @@
 - hosts: 'local' 
   roles: 
     - jareks.devstrap.common
+    - jareks.devstrap.git
+    - jareks.devstrap.bash
     - jareks.devstrap.vim
+    - jareks.devstrap.inputrc
