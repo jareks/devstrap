@@ -1,0 +1,5 @@
+---
+- hosts: 'local' 
+  roles: 
+    - jareks.devstrap.common
+    - jareks.devstrap.vim

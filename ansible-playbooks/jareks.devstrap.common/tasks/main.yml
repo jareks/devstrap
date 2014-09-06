@@ -1,0 +1,14 @@
+---
+- name: install common packages
+  apt: name={{ item }}
+  with_items:
+    - git
+    - curl 
+    - htop
+    - ack-grep
+    - sysstat 
+    - tree 
+    - iotop 
+    - ifstat 
+    - colordiff
+    - build-essential

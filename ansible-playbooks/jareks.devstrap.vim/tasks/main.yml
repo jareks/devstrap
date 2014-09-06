@@ -1,0 +1,58 @@
+---
+- name: install vim and ctags 
+  apt: name={{ item }}
+  with_items:
+    - ctags 
+    - vim-nox
+    - vim-scripts
+    - vim-doc
+    - ruby-dev
+
+- name: symlink vim files 
+  file: 
+    state=link
+    src={{ playbook_dir }}/jareks.devstrap.vim/files/.vimrc 
+    dest={{ local_home }}.vimrc 
+
+- name: prepare vim dirs 
+  file:
+    state=directory
+    path={{ item }}
+  with_items:
+    - "{{ vim_dir }}"
+    - "{{ vim_dir }}/colors"
+
+- name: clone railscasts
+  git: 
+    repo=https://github.com/jpo/vim-railscasts-theme.git 
+    dest={{ vim_dir }}/railscasts
+
+- name: link railscast colors
+  file: 
+    state=link
+    src={{ vim_dir }}/railscasts/colors/railscasts.vim 
+    dest={{ vim_dir }}/colors/railscasts.vim
+
+- name: clone vundle
+  git: 
+    repo=https://github.com/gmarik/vundle.git
+    dest={{ vim_dir }}/bundle/vundle
+
+- name: install vundle
+  command: vim +PluginInstall +qall
+  args:
+    creates: "{{ vim_dir }}/bundle/ack-vim"
+
+- name: "compile command-t: prepare command-t makefile"
+  command: ruby extconf.rb
+  args:
+    chdir: "{{ vim_dir }}/bundle/command-t/ruby/command-t"
+    creates: "{{ vim_dir }}/bundle/command-t/ruby/command-t/Makefile"
+
+- name: "compile command-t: make"
+  command: make
+  args:
+    chdir: "{{ vim_dir }}/bundle/command-t/ruby/command-t"
+    creates: "{{ vim_dir }}/bundle/command-t/ruby/command-t/ext.so"
+
+

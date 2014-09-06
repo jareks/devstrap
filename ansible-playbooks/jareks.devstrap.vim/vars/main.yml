@@ -1,0 +1,3 @@
+---
+local_home: "{{ lookup('env','HOME') }}"
+vim_dir: "{{ local_home }}/.vim"
