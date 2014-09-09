@@ -1,2 +1,3 @@
 ---
 # vars file for jareks.devstrap.common
+dev_user_id: 1000

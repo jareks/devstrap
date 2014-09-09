@@ -12,3 +12,6 @@
     - ifstat 
     - colordiff
     - build-essential
+
+- name: create dev user
+  user: name=dev uid={{ dev_user_id }}
