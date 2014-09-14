@@ -1,8 +1,10 @@
 ---
 - hosts: 'local' 
+  vars:
+  - ansible_sudo_pass: changeme
   roles: 
     - jareks.devstrap.common
-    - jareks.devstrap.git
     - jareks.devstrap.bash
+    - jareks.devstrap.git
     - jareks.devstrap.vim
     - jareks.devstrap.inputrc

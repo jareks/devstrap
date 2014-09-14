@@ -1,6 +1,0 @@
----
-- name: symlink inputrc
-  file: 
-    state=link
-    src={{ playbook_dir }}/jareks.devstrap.inputrc/files/.inputrc
-    dest={{ local_home }}/.inputrc
